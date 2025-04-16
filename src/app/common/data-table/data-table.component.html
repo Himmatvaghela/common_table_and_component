@@ -1,0 +1,420 @@
+<div class="table_border">
+  <div class="tableArea">
+    @if (settingsRequired && settingsClicked) {
+    <div
+      class="setting-options"
+      [isDivOpen]="settingsClicked"
+      isenseClickOutside
+      (clickedOutside)="hideSettings()"
+    >
+      <div class="column-header">Select Headers</div>
+
+      @for(col of colDefs; track col.colId){
+      <div class="column-item">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          [checked]="col.active"
+          (change)="col.active = !col.active"
+        />
+        <span>{{ col.headerName | titlecase }}</span>
+      </div>
+      }
+    </div>
+    }
+
+    <div
+      class="table_wrapper"
+      id="container_scroll"
+      (scroll)="onDivScroll($event)"
+    >
+      <table table cellspacing="0" cellpadding="0">
+        <thead class="sticky-top">
+          <tr>
+            @if(checkBoxSelection){
+            <th class="textTruncate" [ngStyle]="{ width: '35px' }">
+              @if (checkboxSelectionType == 'multiple') {
+              <span
+                ><input
+                  class="form-check-input"
+                  type="checkbox"
+                  name=""
+                  id=""
+                  [checked]="checkAllSelected()"
+                  (change)="onHeaderCheckboxChange($event)"
+              /></span>
+              }
+            </th>
+            } @for (col of colDefs; track col.colId) { @if (col.active) {
+
+            <th
+              class="thead-img"
+              [ngStyle]="getStyle(col)"
+              [ngClass]="{
+                'drag-border': dragIndex == $index,
+                'fix-column': col.headerName.toLowerCase().includes('action')
+              }"
+              draggable="true"
+              (dragstart)="columnDragStart($event, col)"
+              (dragover)="columnDragOver($event, $index)"
+              (dragenter)="columnDragEnter($event, $index)"
+              (dragleave)="columnDragLeave($event, $index)"
+              (drop)="onColumnDrop($event, $index)"
+            >
+              @if (source==='rules') {
+
+              <img
+                src="{{ appUrl }}/assets/images/table/vertical_line.svg"
+                class="swap-img"
+              />
+              } @else {
+
+              <img
+                src="{{ appUrl }}/assets/images/table/more-vertical.svg"
+                class="swap-img"
+                alt=""
+              />
+              }
+              <div
+                class="d-flex header-content theading w-100"
+                [ngStyle]="getStyle(col)"
+              >
+                <div class="left d-flex h-27px">
+                  <span class="ellipsis headerName">{{
+                    col?.headerName.toUpperCase()
+                  }}</span>
+                  @if (sortingRequired) {
+                  <span class="ms-1 headerName-icon">
+                    <ul>
+                      <li
+                        class="cursor-pointer"
+                        (click)="
+                          onSortingRowData($index, col?.fieldName, 'asc')
+                        "
+                      >
+                        <!-- <i class="fa fa-caret-up" [ngClass]="sortingColumnIndex == $index && sortingType == 'asc' ? 'muted_sort' : ''"></i> -->
+                        <img
+                          src="{{ appUrl }}/assets/images/table/Vector_(1).svg"
+                          class="sorting_up"
+                          [ngClass]="
+                            sortingColumnIndex == $index && sortingType == 'asc'
+                              ? 'muted_sort'
+                              : ''
+                          "
+                        />
+                      </li>
+                      <li
+                        class="cursor-pointer"
+                        (click)="
+                          onSortingRowData($index, col?.fieldName, 'dsc')
+                        "
+                      >
+                        <img
+                          src="{{ appUrl }}/assets/images/table/Vector.svg"
+                          class="sorting_down"
+                          [ngClass]="
+                            sortingColumnIndex == $index && sortingType == 'dsc'
+                              ? 'muted_sort'
+                              : ''
+                          "
+                        />
+                      </li>
+                    </ul>
+                  </span>
+                  }
+                </div>
+                <div class="right">
+                  <span class="line"></span>
+                </div>
+              </div>
+            </th>
+
+            }}
+          </tr>
+        </thead>
+        <tbody>
+          @if(groupByTable){ @for(item of groupData;track $index){
+          <tr (click)="item.isCollapsed = !item.isCollapsed">
+            <td class="data-table-td" [attr.colspan]="colDefs.length">
+              <div class="td_wrapper">
+                @if(item.isCollapsed){
+                <span class="td_wrapper">
+                  <i-feather
+                    class="chevron-right pointer"
+                    name="chevron-right"
+                  ></i-feather>
+                </span>
+
+                }@else{
+                <span class="td_wrapper">
+                  <i-feather
+                    class="chevron-down pointer"
+                    name="chevron-down"
+                  ></i-feather>
+                </span>
+                }
+                <span>{{ item.key }}</span>
+              </div>
+            </td>
+          </tr>
+
+          @if(!item.isCollapsed){ @for( data of item.rows; track data.rowId){
+
+          <tr>
+            @for (col of colDefs; track col.colId) { @if ($index==0 &&
+            checkBoxSelection) {
+            <td class="textTruncate">
+              @if (checkboxSelectionType=='multiple') {
+
+              <span
+                ><input
+                  class="form-check-input"
+                  type="checkbox"
+                  name=""
+                  id="{{ data.rowId }}"
+                  [checked]="data?.isSelected"
+                  (change)="onRowCheckboxSelection($event)"
+              /></span>
+
+              }@else{
+              <!-- <span class="checkboxInput">
+                <input
+                  type="radio"
+                  name=""
+                  id="{{ data.rowId }}"
+                  [checked]="data?.isSelected"
+                  (change)="onRowCheckboxSelection($event)"
+                />
+              </span> -->
+              <div class="myForm">
+                <label class="custom_radio">
+                  <input
+                    type="radio"
+                    name=""
+                    id="{{ data.rowId }}"
+                    [checked]="data?.isSelected"
+                    (change)="onRowCheckboxSelection($event)"
+                  />
+                  <span class="radio_mark pointer"></span>
+                </label>
+              </div>
+
+              }
+            </td>
+            } @if(col.active){
+
+            <td
+              class="textTruncate"
+              [ngStyle]="getStyle(col)"
+              [colData]="col"
+              isenseCellMouseState
+            >
+              @if (!col?.cellRenderer) {
+              <span class="ellipsis">
+                {{ parseColValue(data, col.fieldName) || "-" }}
+              </span>
+              } @else{
+              <ng-container
+                [rowParam]="data"
+                [col]="col"
+                [api]="tableOptions"
+                [currentValue]="data[col.fieldName]"
+                isenseRendererParser
+              ></ng-container>
+              }
+            </td>
+            }}
+          </tr>
+          } } } @empty {
+          <tr>
+            <td class="textTruncate" [attr.colspan]="colDefs.length">
+              <div class="small_data">
+                @if (tableOptions?.noDataTemplate) {
+                <ng-container
+                  *ngTemplateOutlet="tableOptions?.noDataTemplate"
+                ></ng-container>
+
+                }@else{
+                <!-- need to style it properly then we will add it -->
+                <span>No Data Found.</span>
+
+                }
+              </div>
+            </td>
+          </tr>
+
+          } } @else{ @for (data of rowData; track data.rowId) {
+          <tr
+            [draggable]="data.isSelected && isRowDraggable"
+            (dragstart)="onRowDrag($event, data)"
+            [ngClass]="{
+              'grey-row': tableOptions?.rowClassFunction
+                ? tableOptions?.rowClassFunction(data)
+                : false
+            }"
+          >
+            @for (col of colDefs; track col.colId) { @if ($index==0 &&
+            checkBoxSelection) {
+            <td class="textTruncate">
+              @if (checkboxSelectionType=='multiple') {
+
+              <span
+                ><input
+                  class="form-check-input"
+                  type="checkbox"
+                  name=""
+                  id="{{ data.rowId }}"
+                  [checked]="data?.isSelected"
+                  (change)="onRowCheckboxSelection($event)"
+              /></span>
+
+              }@else{
+              <!-- <span class="checkboxInput">
+                <input
+                  type="radio"
+                  name=""
+                  id="{{ data.rowId }}"
+                  [checked]="data?.isSelected"
+                  (change)="onRowCheckboxSelection($event)"
+                />
+               </span> -->
+              <label class="custom_radio">
+                <input
+                  type="radio"
+                  name=""
+                  id="{{ data.rowId }}"
+                  [checked]="data?.isSelected"
+                  (change)="onRowCheckboxSelection($event)"
+                />
+                <span class="radio_mark pointer"></span>
+              </label>
+
+              }
+            </td>
+            } @if(col.active){
+
+            <td
+              class="textTruncate"
+              [ngStyle]="getStyle(col)"
+              [ngClass]="{
+                'fix-column': col.headerName.toLowerCase().includes('action'),
+                disabled_col:
+                  (col.headerName.toLowerCase() == 'mandatory' ||
+                    col.headerName.toLowerCase() == 'action') &&
+                  !data?.isModifiable &&
+                  tableOptions?.componentName == 'AdapterProtocols'
+              }"
+              [colData]="col"
+              isenseCellMouseState
+            >
+              @if (!col?.cellRenderer) {
+              <span class="ellipsis">
+                {{ parseColValue(data, col.fieldName) || "-" }}
+              </span>
+              } @else{
+              <ng-container
+                [rowParam]="data"
+                [col]="col"
+                [api]="tableOptions"
+                [currentValue]="data[col.fieldName]"
+                isenseRendererParser
+              ></ng-container>
+              }
+              <!-- Commented for later use -->
+              <!-- <div class="tool_tip">
+              <span class=""> {{ parseColValue(data, col.fieldName) }}aditya </span>
+            </div> -->
+            </td>
+            }}
+          </tr>
+          } @empty { @if(showLoadingData){
+          <tr>
+            <td
+              class="textTruncate"
+              [attr.colspan]="
+                checkBoxSelection ? colDefs.length + 1 : colDefs.length
+              "
+            >
+              <div class="small_data">
+                @if (tableOptions?.noDataTemplate) {
+                <ng-container
+                  *ngTemplateOutlet="tableOptions?.noDataTemplate"
+                ></ng-container>
+
+                }@else{
+                <!-- need to style it properly then we will add it -->
+                <span>No Data Found.</span>
+                }
+              </div>
+            </td>
+          </tr>
+          } }}
+        </tbody>
+      </table>
+    </div>
+    <!--  Table Wrapper Ends-->
+    @if (paginationRequired) {
+    <div class="pagination_main">
+      <div class="entries_details">
+        <span>Showing</span>
+        <select
+          name=""
+          id=""
+          class="input_style left pointer"
+          (change)="onPageSizeChanged($event)"
+        >
+          <option value="10" selected>10</option>
+          <option value="25">25</option>
+          <option value="50">50</option>
+        </select>
+        <span
+          >Rows |
+          {{ totalRecords == 0 ? totalRecords : recordsToShow.min + 1 }} -
+          {{
+            recordsToShow.max > totalRecords ? totalRecords : recordsToShow.max
+          }}
+          of
+          {{ totalRecords }}</span
+        >
+      </div>
+      <div class="pagination_form d-flex align-items-center">
+        <span>Page</span>
+
+        <button
+          class="outlined_btn prev_btn"
+          [ngClass]="pageDetails.currentPage > 1 ? '' : 'disable_btn'"
+          type="button"
+          (click)="onBtPrevClick()"
+        >
+          <span> <i-feather name="chevron-left"></i-feather></span>
+        </button>
+        <div>
+          <input
+            class="input_style right"
+            type="number"
+            [(ngModel)]="pageDetails.currentPage"
+            (change)="goToSelectedPage($event)"
+            name=""
+            id=""
+          />
+        </div>
+        <button
+          class="outlined_btn next_btn"
+          type="button"
+          [ngClass]="
+            pageDetails.currentPage < pageDetails.totalPages
+              ? ''
+              : 'disable_btn'
+          "
+          (click)="onBtNextClick()"
+        >
+          <span> <i-feather name="chevron-right"></i-feather></span>
+        </button>
+        <span>of {{ pageDetails.totalPages }}</span>
+      </div>
+    </div>
+    }
+
+    <!-- Pagination Ends -->
+  </div>
+</div>
