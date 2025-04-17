@@ -6,14 +6,28 @@ import { AppComponent } from './app.component';
 import { DataTableComponent } from './common/data-table/data-table.component';
 import { FeatherModule } from 'angular-feather';
 import { allIcons } from 'angular-feather/icons';
+import { ActionRendererComponent } from './common/data-table/renderers/action-renderer/action-renderer.component';
+import { TripleDotsRendererComponent } from './common/data-table/renderers/triple-dots-renderer/triple-dots-renderer.component';
+import { TagsRendererComponent } from './common/data-table/renderers/tags-renderer/tags-renderer.component';
+import { SingleSelectComponent } from './common/single-select/single-select.component';
+import { MultiSelectComponent } from './common/multi-select/multi-select.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    ActionRendererComponent,
+    TripleDotsRendererComponent,
+    TagsRendererComponent,
+    SingleSelectComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     DataTableComponent,
     FeatherModule.pick(allIcons),
+    MultiSelectComponent,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

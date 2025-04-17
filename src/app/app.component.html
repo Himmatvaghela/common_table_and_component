@@ -10,3 +10,12 @@
     (onPaginationChange)="onPaginationChange($event)"
   ></app-data-table>
 </div>
+
+<div class="multiselect">
+  <isense-multi-select
+    [optionList]="dataLakeList"
+    [dropdownConfig]="dropdownConfig"
+    [(ngModel)]="selectedDataLake"
+    (onSelection)="selectionValue($event)"
+  ></isense-multi-select>
+</div>

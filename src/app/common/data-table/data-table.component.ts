@@ -8,11 +8,11 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { ClickOutsideDirective } from '../../directives/click-outside.directive';
-import { RendererParserDirective } from '../../directives/renderer-parser.directive';
-import { CellMouseStateDirective } from '../../directives/cell-mouse-state.directive';
 import { FeatherModule } from 'angular-feather';
 import { FormsModule } from '@angular/forms';
+import { CellMouseStateDirective } from './directives/cell-mouse-state.directive';
+import { RendererParserDirective } from './directives/renderer-parser.directive';
+import { ClickOutsideDirective } from './directives/click-outside.directive';
 
 @Component({
   selector: 'app-data-table',

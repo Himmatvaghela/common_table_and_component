@@ -1,0 +1,78 @@
+<div class="main-wrapper">
+  <div class="display-div" (click)="toggleDropdown()" [ngClass]="{ 'border-danger': this.inValid }">
+    @if(dropdownConfig.label){
+    <span class="label">
+      <p class="text-ellipsis">{{ dropdownConfig.label }}</p>
+    </span>
+    } @if (selectedOptions.length>0) { @for (item of selectedOptions; track $index) {
+    @if(dropdownConfig.chipLimit>=$index+1){
+    <div class="input_text text-ellipsis">
+      <span>{{ item[config.textField] }} </span>
+      <!-- <i-feather (click)="updateSelectedOption(item)" name="x" class="cross-icon"></i-feather> -->
+    </div>
+    } } }@else{
+    <span class="default_text text-ellipsis">{{ dropdownConfig.placeholder }}</span>
+
+    }
+
+    @if(dropdownConfig.chipLimit<selectedOptions.length){ <span class="view_more">+{{selectedOptions.length -
+      dropdownConfig.chipLimit}}</span>
+      }
+
+      <span class="feather_icon" [ngClass]="{ 'd-none': !showDropdown }"><i-feather name="chevron-up"
+          class="chevron_up"></i-feather></span>
+
+      <span class="feather_icon" [ngClass]="{ 'd-none': showDropdown }"><i-feather name="chevron-down"
+          class="chevron_down"></i-feather></span>
+  </div>
+  @if (showDropdown) {
+  <div class="dropdown-list" id="container_scroll">
+    <ul>
+      @if (dropdownConfig.selectAll && optionList.length>0) {
+      <li class="input_bold" (click)="checkUncheckAll()">
+        <span><input type="checkbox" [checked]="isSelectedAll" /></span>
+        @if(isSelectedAll){
+        <span>UnSelectAll</span>
+
+        } @else{
+        <span>SelectAll</span>
+        }
+      </li>
+      }
+      @if (dropdownConfig.searchRequired) {
+      <li class="input_bold serachbar_input">
+        <div class="search_container">
+             <i-feather class="d-flex" name="search"></i-feather>
+        <input type="text" class="search_input" name="" id="" placeholder="Search Value" [(ngModel)]="searchStr" />
+        </div>
+        
+      </li>
+
+      }
+      
+      @for (option of optionList; track $index) {
+      @if(option[config.textField].toLowerCase().includes(searchStr.toLowerCase())){
+       <div id="container_scroll" class="scrl">
+      <li class="input_bold text-ellipsis d-flex justify-content-between" (click)="updateSelectedOption(option)"
+        [ngClass]="{'disabled_option':option[config.disabledField]}">
+       <div class="checkbox_label_wrapper">
+        <span class="d-flex"><input type="checkbox" [checked]="option.isSelected" class="form-check-input shadow-none pointer m-0" />
+        </span>
+        <span class="query_text">{{ option[config.textField] }} </span>
+       </div>
+        @if(iconTemplate){
+        <ng-container [ngTemplateOutlet]="iconTemplate" [ngTemplateOutletContext]="{ data: option }">
+        </ng-container>
+        }
+        <img src="{{ appUrl }}/assets/images/common/check-icon.svg" [ngClass]=" option.isSelected? 'checkIcon' : 'check_icon'" />
+
+      </li>
+    </div>
+      }
+      } @empty {
+      <li><span>No Data Found.</span></li>
+      }
+    </ul>
+  </div>
+  }
+</div>

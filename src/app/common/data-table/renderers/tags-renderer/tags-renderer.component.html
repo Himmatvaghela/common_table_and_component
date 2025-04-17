@@ -1,0 +1,33 @@
+<div class="tag_name">
+  <ul class="d-flex">
+    @if(listOfItems.length==0 ){
+    <li class="li-list grey_button">
+      <span>Unclassified</span>
+    </li>
+    } @for(item of listOfItems; track $index) { @if ($index < numberOfItem &&
+    nameOfColumn=='multi-color-text' ) {
+    <li class="li-list" [ngClass]="getColorClass(item)">
+      <span
+        [ngClass]="{ mx_width: listOfItems.length > 1 }"
+        class="textTruncate"
+        containerClass="customClass"
+      >
+        {{ item }}</span
+      >
+    </li>
+    } @else if($index < numberOfItem && nameOfColumn=='blue-text' ) {
+    <li
+      class="li-list  {{ colorCodeArray[indexOfColumn]?.colorCodes[0].color }}"
+    >
+      <span
+        [ngClass]="{ mx_width: listOfItems.length > 1 }"
+        class="textTruncate"
+        containerClass="customClass"
+      >
+        {{ item }}</span
+      >
+    </li>
+
+    } }
+  </ul>
+</div>

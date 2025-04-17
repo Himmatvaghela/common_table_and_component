@@ -298,11 +298,6 @@
               [ngStyle]="getStyle(col)"
               [ngClass]="{
                 'fix-column': col.headerName.toLowerCase().includes('action'),
-                disabled_col:
-                  (col.headerName.toLowerCase() == 'mandatory' ||
-                    col.headerName.toLowerCase() == 'action') &&
-                  !data?.isModifiable &&
-                  tableOptions?.componentName == 'AdapterProtocols'
               }"
               [colData]="col"
               isenseCellMouseState

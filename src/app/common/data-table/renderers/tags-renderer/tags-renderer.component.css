@@ -1,0 +1,56 @@
+.tag_name {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.tag_name .red {
+    color: red;
+    background-color:rgb(248, 179, 179);
+    border-radius: 16px;
+    font-size: var(--fs-14);
+    line-height: 20px;
+}
+
+.tag_name .yellow {
+    color: #be731d;
+    background-color: #fef6e7;
+    border-radius: 16px;
+    font-size: var(--fs-14);
+    line-height: 20px;
+}
+
+.tag_name .green {
+    color: green;
+    background-color: #ebf4ec;
+    border-radius: 16px;
+    font-size: var(--fs-14);
+    line-height: 20px;
+}
+
+.tag_name .blue {
+    background-color: rgb(129, 158, 238);
+    border-radius: 16px;
+    color: blue;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.tag_name .li-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3px 8px;
+}
+
+.tag_name .li-list span{
+    white-space: nowrap;
+}
+.tag_name .grey_button {
+    background-color: var(--grey-150);
+    color: var(--black-dust);
+    font-size: var(--fs-14);
+    line-height: 20px;
+    padding: 3px 8px;
+    border-radius: 16px;
+}

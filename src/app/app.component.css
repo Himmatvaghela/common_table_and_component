@@ -3,3 +3,7 @@
 .container{
     height: 100vh;
 }
+
+.multiselect{
+    width: 20vw;
+}
