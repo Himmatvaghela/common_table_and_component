@@ -9,9 +9,9 @@ import { allIcons } from 'angular-feather/icons';
 import { ActionRendererComponent } from './common/data-table/renderers/action-renderer/action-renderer.component';
 import { TripleDotsRendererComponent } from './common/data-table/renderers/triple-dots-renderer/triple-dots-renderer.component';
 import { TagsRendererComponent } from './common/data-table/renderers/tags-renderer/tags-renderer.component';
-import { SingleSelectComponent } from './common/single-select/single-select.component';
 import { MultiSelectComponent } from './common/multi-select/multi-select.component';
 import { FormsModule } from '@angular/forms';
+import { SingleSelectComponent } from './common/single-select/single-select.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,6 @@ import { FormsModule } from '@angular/forms';
     ActionRendererComponent,
     TripleDotsRendererComponent,
     TagsRendererComponent,
-    SingleSelectComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,6 +26,7 @@ import { FormsModule } from '@angular/forms';
     DataTableComponent,
     FeatherModule.pick(allIcons),
     MultiSelectComponent,
+    SingleSelectComponent,
     FormsModule,
   ],
   providers: [],

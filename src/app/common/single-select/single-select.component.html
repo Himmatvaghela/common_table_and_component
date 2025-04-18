@@ -1,1 +1,96 @@
-<p>single-select works!</p>
+<div class="main-wrapper">
+  <div
+    class="single-select-dropdown"
+    (click)="toggleDropdown()"
+    [ngClass]="{
+      'border-danger': this.inValid,
+      'disable-control': disableControl
+    }"
+  >
+    @if(label){
+    <span class="label">
+      <p class="text-ellipsis">{{ label }}</p>
+    </span>
+    } @if (!isObjEmpty(selectedOption) && selectedOption[config.textField]) {
+    <span class="input_text text-ellipsis">
+      {{ selectedOption[config.textField] }}
+    </span>
+    }@else if(selectedOption && isObjEmpty(selectedOption)){
+    <span>{{ selectedOption }}</span>
+    }@else{
+    <span class="default_text text-ellipsis">{{ placeholder }}</span>
+
+    }
+    <span class="feather_icon" [ngClass]="{ 'd-none': !showDropdown }"
+      ><i-feather name="chevron-up"></i-feather
+    ></span>
+
+    <span class="feather_icon" [ngClass]="{ 'd-none': showDropdown }"
+      ><i-feather name="chevron-down"></i-feather
+    ></span>
+  </div>
+  @if (showDropdown) {
+  <div
+    class="dropdown-list single_dropdown"
+    id="container_scroll"
+    (scroll)="onDivScroll($event)"
+  >
+    <ul>
+      @if (searchRequired) {
+      <li class="input_bold search_bar">
+        <input
+          type="text"
+          class="search_input"
+          name="search"
+          [(ngModel)]="searchStr"
+          placeholder="Search..."
+        />
+      </li>
+
+      } @if(isObjEmpty(this.optionList[0] || "")){ @for (option of optionList;
+      track $index) { @if(option.includes(searchStr)){
+      <li
+        class="input_bold"
+        (click)="updateSelectedOption(option)"
+        [ngClass]="{ disabled_option: option[config.disabledField] }"
+      >
+        @if(iconTemplate){
+        <span class="me-1">
+          <ng-container
+            [ngTemplateOutlet]="iconTemplate"
+            [ngTemplateOutletContext]="{ data: option }"
+          ></ng-container>
+        </span>
+
+        }
+        <span>{{ option }}</span>
+        <!-- <i-feather class="right_tick" name="check"></i-feather> -->
+      </li>
+      } } @empty {
+      <li><span>No Data Found.</span></li>
+      } } @else { @for (option of optionList; track $index) {
+      @if(option[config.textField].includes(searchStr)){
+      <li
+        class="input_bold"
+        (click)="updateSelectedOption(option)"
+        [ngClass]="{ disabled_option: option[config.disabledField] }"
+      >
+        @if(iconTemplate){
+        <span class="me-1">
+          <ng-container
+            [ngTemplateOutlet]="iconTemplate"
+            [ngTemplateOutletContext]="{ data: option }"
+          ></ng-container>
+        </span>
+
+        }
+        <span>{{ option[config.textField] }}</span>
+        <!-- <img src="{{ appUrl }}/assets/images/common/check.svg" class="right-tick-icon" /> -->
+      </li>
+      } } @empty {
+      <li><span>No Data Found.</span></li>
+      } }
+    </ul>
+  </div>
+  }
+</div>

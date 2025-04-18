@@ -19,3 +19,12 @@
     (onSelection)="selectionValue($event)"
   ></isense-multi-select>
 </div>
+
+<div class="multiselect">
+  <!-- formControlName="assignedGroup" -->
+  <isense-single-select
+    [(ngModel)]="name"
+    [placeholder]="'Select Assigned Group'"
+    [optionList]="assignedGroupList"
+  ></isense-single-select>
+</div>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TagsRendererComponent } from './common/data-table/renderers/tags-renderer/tags-renderer.component';
 import { ActionRendererComponent } from './common/data-table/renderers/action-renderer/action-renderer.component';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -33,6 +34,12 @@ export class AppComponent {
   selectionValue(value: any) {
     this.selectedDataLake = value;
   }
+
+  //single selct use///////////////
+  name: any;
+  assignedGroup = new FormControl('');
+  assignedGroupList: any[] = ['shyam', 'ram'];
+  //.................................
   colDefs: any = [
     { headerName: 'Action ID', fieldName: 'id' },
     { headerName: 'Action Type', fieldName: 'action_type' },
