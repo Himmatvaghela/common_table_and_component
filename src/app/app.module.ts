@@ -12,6 +12,13 @@ import { TagsRendererComponent } from './common/data-table/renderers/tags-render
 import { MultiSelectComponent } from './common/multi-select/multi-select.component';
 import { FormsModule } from '@angular/forms';
 import { SingleSelectComponent } from './common/single-select/single-select.component';
+import { CustomValidationDirective } from './directives/custom-validation.directive';
+import { ClickOutsideDirective } from './directives/click-outside.directive';
+import { FormComponent } from './pages/form/form.component';
+import { HomeComponent } from './pages/home/home.component';
+import { SidebarComponent } from './common/sidebar/sidebar.component';
+import { HeaderComponent } from './common/header/header.component';
+import { ReadObjectPipe } from './pipes/read-object.pipe';
 
 @NgModule({
   declarations: [
@@ -19,6 +26,13 @@ import { SingleSelectComponent } from './common/single-select/single-select.comp
     ActionRendererComponent,
     TripleDotsRendererComponent,
     TagsRendererComponent,
+    CustomValidationDirective,
+    ClickOutsideDirective,
+    FormComponent,
+    HomeComponent,
+    SidebarComponent,
+    HeaderComponent,
+    ReadObjectPipe,
   ],
   imports: [
     BrowserModule,

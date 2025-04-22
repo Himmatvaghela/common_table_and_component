@@ -1,0 +1,30 @@
+<div class="container">
+  <app-data-table
+    [colDefs]="colDefs"
+    [rowData]="rowData"
+    [draggable]="false"
+    [sortingRequired]="false"
+    [tableOptions]="tableOptions"
+    [totalRecords]="totalRecords"
+    [paginationRequired]="true"
+    (onPaginationChange)="onPaginationChange($event)"
+  ></app-data-table>
+</div>
+
+<div class="multiselect">
+  <isense-multi-select
+    [optionList]="dataLakeList"
+    [dropdownConfig]="dropdownConfig"
+    [(ngModel)]="selectedDataLake"
+    (onSelection)="selectionValue($event)"
+  ></isense-multi-select>
+</div>
+
+<div class="multiselect">
+  <!-- formControlName="assignedGroup" -->
+  <isense-single-select
+    [(ngModel)]="name"
+    [placeholder]="'Select Assigned Group'"
+    [optionList]="assignedGroupList"
+  ></isense-single-select>
+</div>

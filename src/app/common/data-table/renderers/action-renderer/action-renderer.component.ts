@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AppComponent } from '../../../../app.component';
+import { HomeComponent } from '../../../../pages/home/home.component';
 
 @Component({
   selector: 'app-action-renderer',
@@ -14,8 +14,8 @@ export class ActionRendererComponent {
     console.log('action renderer');
     this.tableApi = tableAPI;
     this.params = params;
-    if (this.tableApi.parentRef instanceof AppComponent) {
-      this.parentComp = 'AppComponent';
+    if (this.tableApi.parentRef instanceof HomeComponent) {
+      this.parentComp = 'HomeComponent';
     }
   }
 

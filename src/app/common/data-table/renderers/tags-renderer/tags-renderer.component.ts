@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AppComponent } from '../../../../app.component';
+import { HomeComponent } from '../../../../pages/home/home.component';
 
 @Component({
   selector: 'app-tags-renderer',
@@ -15,7 +15,7 @@ export class TagsRendererComponent {
   numberOfItem: number = 2;
 
   cellInit(params: any, tableApi: any) {
-    if (tableApi.parentRef instanceof AppComponent) {
+    if (tableApi.parentRef instanceof HomeComponent) {
       if (params.cellParams.name == 'blue-text') {
         this.nameOfColumn = 'blue-text';
 

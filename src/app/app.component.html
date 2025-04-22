@@ -1,30 +1,18 @@
-<div class="container">
-  <app-data-table
-    [colDefs]="colDefs"
-    [rowData]="rowData"
-    [draggable]="false"
-    [sortingRequired]="false"
-    [tableOptions]="tableOptions"
-    [totalRecords]="totalRecords"
-    [paginationRequired]="true"
-    (onPaginationChange)="onPaginationChange($event)"
-  ></app-data-table>
-</div>
-
-<div class="multiselect">
-  <isense-multi-select
-    [optionList]="dataLakeList"
-    [dropdownConfig]="dropdownConfig"
-    [(ngModel)]="selectedDataLake"
-    (onSelection)="selectionValue($event)"
-  ></isense-multi-select>
-</div>
-
-<div class="multiselect">
-  <!-- formControlName="assignedGroup" -->
-  <isense-single-select
-    [(ngModel)]="name"
-    [placeholder]="'Select Assigned Group'"
-    [optionList]="assignedGroupList"
-  ></isense-single-select>
+<div class="app_container">
+  <div class="header">
+    <app-header></app-header>
+  </div>
+  <div class="box">
+    <div
+      class="sidebar"
+      *ngIf="commonService.sidebarToggle"
+      appClickOutside
+      (outsideClick)="outsideClicked($event)"
+    >
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>

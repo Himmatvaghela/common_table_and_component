@@ -1,0 +1,20 @@
+<div class="container">
+  <form #form="ngForm" (submit)="formSubmit(form)">
+    <input type="text" placeholder="FirstName" name="FirstName" ngModel />
+    <input type="email" placeholder="Email" name="Email" ngModel />
+    <input
+      type="text"
+      placeholder="Password"
+      name="Password"
+      ngModel
+      appCustomValidation
+      pattern="^[a-z]+$"
+    />
+    <span *ngIf="form.controls?.['Password']?.errors?.['wrongPattern']"
+      >Password must be lowerCase and Alfabate</span
+    >
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
+<h1>{{ obj | readObject : "id.name.realName" }}</h1>
