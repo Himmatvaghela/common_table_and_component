@@ -1,0 +1,13 @@
+
+
+.breadcrumb{
+    display: flex;
+    align-items: center;
+    grid-gap: 0.5rem;
+    margin: 0;
+}
+
+a{
+    color: white;
+    text-decoration: none;
+}

@@ -4,3 +4,21 @@
     flex-direction: column;
     align-items: start;
 }
+
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid black;
+    height: 200px;
+    overflow: auto;
+}
+.wrapper li{
+    padding: 5px 0;
+    border-bottom: 1px solid red;
+}
+
+::ng-deep .highlight {
+    background-color: red !important;
+    /* font-weight: bold; */
+}

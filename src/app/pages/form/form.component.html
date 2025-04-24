@@ -18,3 +18,20 @@
 </div>
 
 <h1>{{ obj | readObject : "id.name.realName" }}</h1>
+
+<div class="wrapper" appInfinitScroll (scrollEmit)="onScroll($event)">
+  <li *ngFor="let num of listForInfiniteScroll">{{ num }}</li>
+</div>
+
+<div>
+  <input
+    type="text"
+    [(ngModel)]="searchText"
+    placeholder="Enter word to highlight"
+  />
+</div>
+
+<p [search]="searchText" appHighlightText>
+  Angular is an awesome framework for building web applications. You can
+  highlight any word in this paragraph.
+</p>

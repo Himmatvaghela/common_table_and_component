@@ -19,6 +19,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { SidebarComponent } from './common/sidebar/sidebar.component';
 import { HeaderComponent } from './common/header/header.component';
 import { ReadObjectPipe } from './pipes/read-object.pipe';
+import { InfinitScrollDirective } from './directives/infinit-scroll.directive';
+import { BreadcrumbComponent } from './common/breadcrumb/breadcrumb.component';
+import { HighlightTextDirective } from './directives/highlight-text.directive';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,9 @@ import { ReadObjectPipe } from './pipes/read-object.pipe';
     SidebarComponent,
     HeaderComponent,
     ReadObjectPipe,
+    InfinitScrollDirective,
+    BreadcrumbComponent,
+    HighlightTextDirective,
   ],
   imports: [
     BrowserModule,
