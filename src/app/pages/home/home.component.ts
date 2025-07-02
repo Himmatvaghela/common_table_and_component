@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { TagsRendererComponent } from '../../common/data-table/renderers/tags-renderer/tags-renderer.component';
 import { ActionRendererComponent } from '../../common/data-table/renderers/action-renderer/action-renderer.component';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-home',

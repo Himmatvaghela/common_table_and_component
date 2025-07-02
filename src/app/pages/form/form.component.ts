@@ -22,7 +22,7 @@ export class FormComponent {
     }
   }
 
-  searchText?: string;
+  searchText: string = '';
   paragraph =
     'Angular is an awesome framework for building web applications. You can highlight any word in this paragraph.';
 }

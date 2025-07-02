@@ -13,7 +13,7 @@ import {
 })
 export class HighlightTextDirective implements OnChanges {
   constructor(private el: ElementRef) {}
-  @Input() search: any = '';
+  @Input() search: string = '';
 
   ngOnChanges(changes: SimpleChanges): void {
     let value = this.el.nativeElement.textContent;

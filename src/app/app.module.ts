@@ -22,6 +22,7 @@ import { ReadObjectPipe } from './pipes/read-object.pipe';
 import { InfinitScrollDirective } from './directives/infinit-scroll.directive';
 import { BreadcrumbComponent } from './common/breadcrumb/breadcrumb.component';
 import { HighlightTextDirective } from './directives/highlight-text.directive';
+import { AttributeDirective } from './directives/attribute.directive';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { HighlightTextDirective } from './directives/highlight-text.directive';
     InfinitScrollDirective,
     BreadcrumbComponent,
     HighlightTextDirective,
+    AttributeDirective,
   ],
   imports: [
     BrowserModule,
