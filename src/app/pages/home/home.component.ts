@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { TagsRendererComponent } from '../../common/data-table/renderers/tags-renderer/tags-renderer.component';
 import { ActionRendererComponent } from '../../common/data-table/renderers/action-renderer/action-renderer.component';
 import { forkJoin } from 'rxjs';
+import { CommonService } from '../../services/common.service';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +11,7 @@ import { forkJoin } from 'rxjs';
   styleUrl: './home.component.css',
 })
 export class HomeComponent {
+  constructor(private commonService: CommonService) {}
   tableOptions: any = {
     parentRef: this,
   };
@@ -107,6 +109,22 @@ export class HomeComponent {
         option: 'Open',
       },
     ];
+
+    //wizards code
+    // this.commonService.activeStep.update((activeStepObj: any) => {
+    //   return { ...activeStepObj, adapter: 1 };
+    // });
+
+    // this.commonService.stepConfig.update((stepData: any) => {
+    //   return {
+    //     ...stepData,
+    //     adapter: [
+    //       { state: 'active', title: 'Enter Basic Details' },
+    //       { state: 'normal', title: 'Define Protocol(s)' },
+    //       { state: 'normal', title: 'Result' },
+    //     ],
+    //   };
+    // });
   }
 
   onPaginationChange(event: any) {
@@ -138,4 +156,12 @@ export class HomeComponent {
       }
     }
   }
+
+  // goToNextStep(): void {
+  //   this.commonService.nextStep('adapter');
+  // }
+
+  // goToPrevStep(): void {
+  //   this.commonService.previousStep('adapter');
+  // }
 }

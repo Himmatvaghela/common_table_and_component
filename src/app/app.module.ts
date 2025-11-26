@@ -23,6 +23,7 @@ import { InfinitScrollDirective } from './directives/infinit-scroll.directive';
 import { BreadcrumbComponent } from './common/breadcrumb/breadcrumb.component';
 import { HighlightTextDirective } from './directives/highlight-text.directive';
 import { AttributeDirective } from './directives/attribute.directive';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { AttributeDirective } from './directives/attribute.directive';
     MultiSelectComponent,
     SingleSelectComponent,
     FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
