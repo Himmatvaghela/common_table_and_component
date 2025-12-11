@@ -1,10 +1,11 @@
 import { Injectable, signal } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CommonService {
-  constructor() {}
+  constructor(private sanitizer: DomSanitizer) {}
 
   sidebarToggle = false;
 
@@ -131,5 +132,12 @@ export class CommonService {
       }
       return config;
     });
+  }
+
+  getImageFromBase64(base64string: string): any {
+    if (base64string) {
+      const fullBase64String = `data:${base64string};base64,${base64string}`;
+      return this.sanitizer.bypassSecurityTrustUrl(fullBase64String);
+    }
   }
 }
